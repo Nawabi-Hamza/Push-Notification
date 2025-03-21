@@ -10,7 +10,9 @@ if (btn) {
 
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
-        pushMessage("Please come back!", "We miss you!", icon, "notify_me");
+        setInterval(() => {
+            pushMessage("Please come back!", "We miss you!", icon, "notify_me");
+        }, 5000);
     } else {
         pushMessage("Welcome back!", "We are happy to see you again!", icon, "notify_me");
     }
