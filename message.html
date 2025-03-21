@@ -1,43 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Push Notifications</title>
-</head>
-<body>
-    <button onclick="requestPermission()">Enable Notifications</button>
-    <button onclick="sendNotification()">Send Notification</button>
+  </head>
+  <body>
     <button class="click-button">Click Notification</button>
 
-    <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("sw.js").then(reg => {
-                console.log("✅ Service Worker Registered:", reg);
-            }).catch(error => console.error("❌ SW Registration Failed:", error));
-        }
 
-        function requestPermission() {
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    alert("✅ Notifications enabled!");
-                } else {
-                    alert("❌ Notifications blocked!");
-                }
-            });
-        }
 
-        function sendNotification() {
-            if ("serviceWorker" in navigator) {
-                navigator.serviceWorker.ready.then(reg => {
-                    reg.showNotification("Hello!", {
-                        body: "This is a test notification.",
-                        icon: "icon.png"
-                    });
-                });
-            }
-        }
-    </script>
-    <script src="./main.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/@hamza-nawabi/notification-manager@2.4.3/index.min.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>
