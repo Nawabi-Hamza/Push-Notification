@@ -10,10 +10,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 })
 
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "hidden") {
-    notifier.autoNotifyWhenHidden("Hello Nawabi", "🤔 You are still here?", "google-messages-icon-png", 30000);
-  }else{
-    notifier.sendNotification("Hello Nawabi", "👋🏻 Welcome back!");
-  }
-});
+notifier.autoNotifyWhenHidden("Hello Nawabi", "🤔 You are still here?", "google-messages-icon-png", 30000);
