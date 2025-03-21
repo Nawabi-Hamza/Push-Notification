@@ -4,15 +4,15 @@ const notifier = new NotificationManager();
 notifier.requestPermission();
 
 document.addEventListener("DOMContentLoaded", () => {
-    notifier.sendNotification("Hello Nawabi", "😊 Page Loaded Bro!");
+    notifier.sendNotification("Hello Nawabi", "😊 Page Loaded Bro!", "google-messages-icon.png");
     btn.addEventListener("click", () => {
-        notifier.sendNotification("Hello Nawabi", "👆🏻 You clicked the button!");
+        notifier.sendNotification("Hello Nawabi", "👆🏻 You clicked the button!", "google-messages-icon.png");
     });
 })
 
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "hidden") {
-    notifier.autoNotifyWhenHidden("Hello Nawabi", "🤔 You are still here?", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPNLA6Vl3xMbPDlgEMFb3QP04Xi0fpgIdfNQ&s", 30000);
+    notifier.autoNotifyWhenHidden("Hello Nawabi", "🤔 You are still here?", "google-messages-icon-png", 30000);
   }else{
     notifier.sendNotification("Hello Nawabi", "👋🏻 Welcome back!");
   }
