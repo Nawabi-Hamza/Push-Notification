@@ -8,12 +8,16 @@
 
 self.addEventListener("push", function (event) {
     try {
-        const data = event.data ? event.data.json() : {}; // ✅ Prevent errors if no data
-        console.log(data)
+        if (!event.data) {
+            console.warn("🚨 No push data received.");
+            return;
+        }
+
+        const data = event.data.json();
         self.registration.showNotification(data.title || "New Notification", {
             body: data.body || "You have a new message.",
             icon: data.icon || "https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/two-way-chat-bubble-icon.png",
-            data: { url: data.url || "https://github.com/Nawabi-Hamza" } // ✅ Use provided URL or fallback
+            data: { url: data.url || "https://github.com/Nawabi-Hamza" } // ✅ Make sure URL is included
         });
     } catch (error) {
         console.error("❌ Error handling push event:", error);
@@ -21,27 +25,29 @@ self.addEventListener("push", function (event) {
 });
 
 self.addEventListener("notificationclick", function (event) {
-    event.notification.close(); // ✅ Close notification on click
-    
+    event.notification.close(); // ✅ Close the notification when clicked
+
     event.waitUntil(
         (async () => {
             try {
-                console.log(event)
-                console.log(event.notification)
+                const url = event.notification.data?.url || "https://github.com/Nawabi-Hamza"; // ✅ Get URL from notification
+                if (!url) {
+                    console.error("🚨 No URL found in notification data.");
+                    return;
+                }
+
                 const allClients = await clients.matchAll({ type: "window", includeUncontrolled: true });
-                const url = event.notification.data?.url || "https://github.com/Nawabi-Hamza"; // ✅ Use provided URL
-                console.log(`URL: ${url}`)
-                console.log(`All Clients: ${allClients}`)
-                // ✅ Focus an existing tab if open
+
+                // ✅ Try to focus an existing tab with the same URL
                 for (const client of allClients) {
-                    if (client.url.includes(new URL(url).hostname) && "focus" in client) {
+                    if (client.url === url && "focus" in client) {
                         return client.focus();
                     }
                 }
 
                 // ✅ Open a new tab if no existing tab is found
                 if (clients.openWindow) {
-                    await clients.openWindow(url);
+                    return clients.openWindow(url);
                 }
             } catch (error) {
                 console.error("❌ Error opening notification URL:", error);
