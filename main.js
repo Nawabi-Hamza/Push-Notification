@@ -16,7 +16,8 @@
 
 
         document.addEventListener("DOMContentLoaded", () => {
-            const notify = new NotificationManager("https://cdn.jsdelivr.net/npm/@hamza-nawabi/notification-manager@2.4.7/sw.js");
+            // const notify = new NotificationManager("https://cdn.jsdelivr.net/npm/@hamza-nawabi/notification-manager@2.4.7/sw.js");
+            const notify = new NotificationManager("./sw.js");
             notify.requestPermission();
     
             const button = document.querySelector('button');
