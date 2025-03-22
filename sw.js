@@ -8,8 +8,8 @@
 
 self.addEventListener("push", function (event) {
     try {
-        console.log(event.data)
         const data = event.data ? event.data.json() : {}; // ✅ Prevent errors if no data
+        console.log(data)
         self.registration.showNotification(data.title || "New Notification", {
             body: data.body || "You have a new message.",
             icon: data.icon || "https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/two-way-chat-bubble-icon.png",
@@ -30,7 +30,8 @@ self.addEventListener("notificationclick", function (event) {
                 console.log(event.notification)
                 const allClients = await clients.matchAll({ type: "window", includeUncontrolled: true });
                 const url = event.notification.data?.url || "https://github.com/Nawabi-Hamza"; // ✅ Use provided URL
-
+                console.log(`URL: ${url}`)
+                console.log(`All Clients: ${allClients}`)
                 // ✅ Focus an existing tab if open
                 for (const client of allClients) {
                     if (client.url.includes(new URL(url).hostname) && "focus" in client) {
