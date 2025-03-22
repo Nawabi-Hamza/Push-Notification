@@ -16,11 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", () => {
       console.log("🔘 Button clicked");
       notify.sendNotification(
-        "Hello World",
-        "This is a test message",
+        "Dear, Hamza Nawabi",
+        "This is a test message for demo",
         "google-messages-icon.png",
-        "Test-Notification",
-        "https://github.com/Nawabi-Hamza/notfication-manager"
+        "Notification",
+        "https://github.com/Nawabi-Hamza"
       );
     });
   } else {
