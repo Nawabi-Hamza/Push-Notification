@@ -22,12 +22,12 @@ self.addEventListener("push", function (event) {
 
 self.addEventListener("notificationclick", function (event) {
     event.notification.close(); // ✅ Close notification on click
-    console.log(event)
-    console.log(event.notification)
-
+    
     event.waitUntil(
         (async () => {
             try {
+                console.log(event)
+                console.log(event.notification)
                 const allClients = await clients.matchAll({ type: "window", includeUncontrolled: true });
                 const url = event.notification.data?.url || "https://github.com/Nawabi-Hamza"; // ✅ Use provided URL
 
