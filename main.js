@@ -12,20 +12,22 @@
 
 // notifier.autoNotifyWhenHidden("Hello Nawabi", "🤔 You are still here?", "google-messages-icon-png", 30000, "https://github.com/Nawabi-Hamza");
 
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
-    // const notify = new NotificationManager("https://cdn.jsdelivr.net/npm/@hamza-nawabi/notification-manager@2.4.7/sw.js");
-    const notify = new NotificationManager("/sw.js");
-    notify.requestPermission();
+  const notify = new NotificationManager("/sw.js");
+  notify.requestPermission();
 
-    const button = document.querySelector('button');
-    if (button) {
-        button.addEventListener("click", () => 
-            notify.sendNotification('Hello World', "This is a test message", false, false, false)
-        );
-    } else {
-        console.error("❌ Button not found in the document.");
-    }
+  const button = document.querySelector("button");
+  if (button) {
+    button.addEventListener("click", () =>
+      notify.sendNotification(
+        "Hello World",
+        "This is a test message",
+        false,
+        false,
+        "https://github.com/Nawabi-Hamza"
+      )
+    );
+  } else {
+    console.error("❌ Button not found in the document.");
+  }
 });
