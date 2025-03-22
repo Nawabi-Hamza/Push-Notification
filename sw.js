@@ -8,6 +8,7 @@
 
 self.addEventListener("push", function (event) {
     try {
+        console.log(event.data)
         const data = event.data ? event.data.json() : {}; // ✅ Prevent errors if no data
         self.registration.showNotification(data.title || "New Notification", {
             body: data.body || "You have a new message.",
@@ -21,6 +22,8 @@ self.addEventListener("push", function (event) {
 
 self.addEventListener("notificationclick", function (event) {
     event.notification.close(); // ✅ Close notification on click
+    console.log(event)
+    console.log(event.notification)
 
     event.waitUntil(
         (async () => {
